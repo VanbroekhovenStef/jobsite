@@ -1,0 +1,20 @@
+<article class="col-sm-12 col-md-12, col-lg-6, col-xl-4  d-flex align-items-stretch" *ngFor="let vacature of vacatures" >
+    <h3>{{vacature.titel}}</h3>
+    <h4>{{vacature.bedrijfId}}</h4>
+    <figure>
+        <img src="" alt="{{vacature.bedrijfId}}">
+        <figcaption></figcaption>
+    </figure>
+    <p>
+        <button (click)="detail(vacature.id)">Bekijken</button>
+    </p>
+    <section>
+        <h4>Omschrijving</h4>
+        <p>{{vacature.omschrijving | shortenContent : 250}}</p>
+    </section>
+    <footer>
+        <p>{{vacature.bedrijfId}}</p>
+    </footer>
+    <p>Aantal sollicitaties <span>{{vacature.sollicitaties.length}}</span></p>
+</article>
+

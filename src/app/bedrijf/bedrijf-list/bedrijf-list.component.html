@@ -1,0 +1,28 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+<button type="button" class="btn btn-success addBtn" (click)="add()"><i class="fas fa-plus"></i> Nieuw bedrijf toevoegen</button>
+<table class="table" *ngIf="bedrijven && bedrijven.length > 0">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Naam</th>
+      <th scope="col">Omschrijving</th>
+      <th scope="col">Adres</th>
+      <th scope="col">Acties</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bedrijf of bedrijven">
+      <th scope="row">{{bedrijf.id}}</th>
+      <td>{{bedrijf.naam}}</td>
+      <td>{{bedrijf.omschrijving}}</td>
+      <td>{{bedrijf.adres}}</td>
+      <td>
+        <button type="button" class="btn btn-success" (click)="edit(bedrijf.id)"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger" (click)="delete(bedrijf.id)"><i class="far fa-trash-alt"></i></button>
+      </td>
+    </tr>
+    </tbody>
+</table>

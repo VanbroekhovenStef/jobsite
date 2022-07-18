@@ -1,0 +1,26 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  <table class="table" *ngIf="sollicitaties && sollicitaties.length > 0">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Naam</th>
+      <th scope="col">Email</th>
+      <th scope="col">Motivatie</th>
+      <th scope="col">Acties</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sollicitatie of sollicitaties">
+      <th scope="row">{{sollicitatie.id}}</th>
+      <td>{{sollicitatie.user.naam}}</td>
+      <td>{{sollicitatie.user.email}}</td>
+      <td>{{sollicitatie.motivatie}}</td>
+      <td>
+        <button type="button" class="btn btn-success" (click)="edit(sollicitatie.id)"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-danger" (click)="delete(sollicitatie.id)"><i class="far fa-trash-alt"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>

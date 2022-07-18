@@ -1,0 +1,17 @@
+<h1>{{getTitle()}}</h1>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="sollicitatieForm">
+  <div class="form-group">
+    <label for="motivatie">Motivatie</label>
+    <textarea class="form-control" id="motivatie" name="motivatie" placeholder="motivatie" formControlName="motivatie"
+           minlength="2"
+           rows="5"
+           cols="50"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!sollicitatieForm.valid || isSubmitted">Versturen
+  </button>
+  <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!sollicitatieForm.valid || isSubmitted">Bewerking opslaan
+  </button>
+</form>
