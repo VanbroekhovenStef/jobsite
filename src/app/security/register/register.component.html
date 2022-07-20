@@ -1,0 +1,35 @@
+<h1>Register</h1>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" class="form-control" [(ngModel)]="user.email" required email>
+  </div>
+  <div class="form-group">
+    <label for="naam">Naam</label>
+    <input type="text" name="naam" id="naam" class="form-control" [(ngModel)]="user.naam" required naam>
+  </div>
+  <div class="form-group">
+    <label for="voornaam">Voornaam</label>
+    <input type="text" name="voornaam" id="voornaam" class="form-control" [(ngModel)]="user.voornaam" required voornaam>
+  </div>
+  <div class="form-group">
+    <label for="adres">Adres</label>
+    <input type="text" name="adres" id="adres" class="form-control" [(ngModel)]="user.voornaam" required voornaam>
+  </div>
+  <div class="form-group">
+    <label for="telefoon">Telefoonnummer</label>
+    <input type="text" name="telefoon" id="telefoon" class="form-control" [(ngModel)]="user.telefoon" required telefoon>
+  </div>
+  <div class="form-group">
+    <label for="linkedIn">LinkedIn</label>
+    <input type="text" name="linkedIn" id="linkedIn" class="form-control" [(ngModel)]="user.linkedIn" required linkedIn>
+  </div>
+  <div class="form-group mb-4">
+    <label for="wachtwoord">Paswoord</label>
+    <input type="password" name="wachtwoord" id="wachtwoord" class="form-control" minlength="4" [(ngModel)]="user.wachtwoord" required="">
+  </div>
+  <input name="register" id="register" class="btn btn-block btn-primary mb-4" type="submit" value="Registreer" [disabled]="!registerForm.form.valid || isSubmitted">
+</form>

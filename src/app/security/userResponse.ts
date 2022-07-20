@@ -5,7 +5,7 @@ export interface UserResponse {
     id: number,
     email: string,
     wachtwoord?: string,
-    role: string
+    roleId: number
 
     //Kijken hoe dit wel kan gebeuren door gebruik te maken van User --> user: User
 }

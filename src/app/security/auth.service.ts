@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './user';
+import { User as Register } from '../admin/user/user'; 
 import { UserResponse } from './userResponse';
+import { RegisterComponent } from './register/register.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,12 @@ export class AuthService {
 
   getUser(): User | null {
     if (this.isLoggedIn()){
-      return { id : parseInt(localStorage.getItem('id') ?? '0') ,
+      return { 
+        id : parseInt(localStorage.getItem('id') ?? '0'),
         email: localStorage.getItem('email') ?? '', wachtwoord: '',
-        token: this.getToken()  };
+        token: this.getToken(),
+        roleId: parseInt(localStorage.getItem('roleId') ?? '0')
+        };
     } else {
       return null;
     }
@@ -38,7 +43,17 @@ export class AuthService {
     return this.httpClient.post<UserResponse>('https://localhost:44393/api/users/authenticate', user);
   }
 
-  register(user: User): Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>('http://localhost:3000/register', user);
+  register(user: Register): Observable<UserResponse> {
+    return this.httpClient.post<UserResponse>('https://localhost:44393/api/users', user);
+  }
+
+  isBedrijfsbeheerder() {
+    let bedrijfsbeheerder = localStorage.getItem('role');
+    return bedrijfsbeheerder === '2';
+  }
+
+  isSuperadmin() {
+    let superadmin = localStorage.getItem('role');
+    return superadmin === '3';
   }
 }
