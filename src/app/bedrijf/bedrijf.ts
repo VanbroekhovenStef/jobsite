@@ -1,4 +1,5 @@
 import { User } from "../admin/user/user";
+import { Vacature } from "../vacature/vacature";
 
 export interface Bedrijf {
     id: number;
@@ -8,5 +9,6 @@ export interface Bedrijf {
     foto: string;
     telefoon: string;
     userId: number;
-    user: User
+    user: User;
+    vacatures: Vacature[];
 }

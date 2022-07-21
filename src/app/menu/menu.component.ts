@@ -36,4 +36,12 @@ export class MenuComponent implements OnInit {
       this.router.navigate(['/sollicitatie'], {state: {id: id, mode: 'gebruiker'}})
   }
 
+  bedrijvenBeheren(id: number) {
+    this.router.navigate(['bedrijf'], {state: {id: id, mode: 'beheerder'}});
+  }
+
+  bedrijvenBeherenAdmin() {
+    this.router.navigate(['bedrijf']);
+  }
+
 }

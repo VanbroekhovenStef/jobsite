@@ -2,7 +2,31 @@
     {{errorMessage}}
 </div>
 <button type="button" class="btn btn-success addBtn" (click)="add()"><i class="fas fa-plus"></i> Nieuwe vacature toevoegen</button>
-<table class="table" *ngIf="vacatures && vacatures.length > 0">
+<table class="table" *ngIf="(vacatures && vacatures.length > 0)">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titel</th>
+        <th scope="col">Bedrijf</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vacature of vacatures">
+            <th scope="row">{{vacature.id}}</th>
+            <td>{{vacature.titel}}</td>
+            <td>{{vacature.bedrijf.naam}}</td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="sollicitaties(vacature.id)">Bekijk sollicitaties</button>
+                <button type="button" class="btn btn-success" (click)="edit(vacature.id)">Bewerken <i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" (click)="delete(vacature.id)"><i class="far fa-trash-alt"></i></button>
+            </td>
+        </tr>
+    
+    </tbody>       
+    </table>
+
+<table class="table" *ngIf="(bedrijven && bedrijven.length > 0)">
 <thead>
 <tr>
     <th scope="col">#</th>
@@ -11,16 +35,17 @@
     <th scope="col">Actions</th>
 </tr>
 </thead>
-<tbody>
-<tr *ngFor="let vacature of vacatures">
-    <th scope="row">{{vacature.id}}</th>
-    <td>{{vacature.titel}}</td>
-    <td>{{vacature.bedrijf.naam}}</td>
-    <td>
-        <button type="button" class="btn btn-primary" (click)="sollicitaties(vacature.id)">Bekijk sollicitaties</button>
-        <button type="button" class="btn btn-success" (click)="edit(vacature.id)">Bewerken <i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger" (click)="delete(vacature.id)"><i class="far fa-trash-alt"></i></button>
-    </td>
-</tr>
-</tbody>
+<tbody *ngFor="let bedrijf of bedrijven">
+    <tr *ngFor="let vacature of bedrijf.vacatures">
+        <th scope="row">{{vacature.id}}</th>
+        <td>{{vacature.titel}}</td>
+        <td>{{bedrijf.naam}}</td>
+        <td>
+            <button type="button" class="btn btn-primary" (click)="sollicitaties(vacature.id)">Bekijk sollicitaties</button>
+            <button type="button" class="btn btn-success" (click)="edit(vacature.id)">Bewerken <i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" (click)="delete(vacature.id)"><i class="far fa-trash-alt"></i></button>
+        </td>
+    </tr>
+
+</tbody>       
 </table>

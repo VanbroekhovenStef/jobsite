@@ -22,10 +22,11 @@ export class AuthService {
     if (this.isLoggedIn()){
       return { 
         id : parseInt(localStorage.getItem('id') ?? '0'),
-        email: localStorage.getItem('email') ?? '', wachtwoord: '',
+        email: localStorage.getItem('email') ?? '', 
+        wachtwoord: '',
         token: this.getToken(),
-        roleId: parseInt(localStorage.getItem('roleId') ?? '0')
-        };
+        roleId: parseInt(localStorage.getItem('role') ?? '0')
+      };
     } else {
       return null;
     }
@@ -37,7 +38,6 @@ export class AuthService {
     localStorage.removeItem('voornaam');
     localStorage.removeItem('email');
     localStorage.removeItem('role');
-
   }
 
   isLoggedIn(): boolean {

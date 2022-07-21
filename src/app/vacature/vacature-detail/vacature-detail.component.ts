@@ -16,22 +16,24 @@ import { SollicitatieService } from '../sollicitatie/sollicitatie.service';
 export class VacatureDetailComponent implements OnInit {
 
   heeftGesolliciteerd: boolean = false;
+  sollicitatieId: number = 0;
+  vacatures: Vacature[] = [];
 
   constructor(private vacatureService: VacatureService, private route: ActivatedRoute, private router: Router, private sollicitatieService: SollicitatieService) {
-    const userId = localStorage.getItem('id') ?? '';
-    const vacatureId = this.route.snapshot.paramMap.get('id') ?? '';
+    const userId = Number(localStorage.getItem('id')) ?? 0;
+    const vacatureId = Number(this.route.snapshot.paramMap.get('id')) ?? 0;
+    console.log(userId, vacatureId);
     sollicitatieService.getSollicitatiesOnVacatureFromUser(userId, vacatureId).subscribe(result => {
-      this.heeftGesolliciteerd = result.length > 0
-      console.log(result.length);
+      this.heeftGesolliciteerd = result != null;
+      this.sollicitatieId = result.id;
+      console.log(result);
       console.log(this.heeftGesolliciteerd);
     })
    }
 
-
-
   role: Role = { id: 0, name: "" };
   user: User = { id: 0, naam: "", voornaam: "", email: "", wachtwoord: "", adres: "", telefoon: "", cv: "", linkedIn: "", roleId: 0, foto: "", role: this.role }
-  bedrijf: Bedrijf = { id: 0, naam: "", omschrijving: "", userId: 0, user: this.user, adres: "", foto: "", telefoon: "" }
+  bedrijf: Bedrijf = { id: 0, naam: "", omschrijving: "", userId: 0, user: this.user, adres: "", foto: "", telefoon: "", vacatures: this.vacatures }
   sollicitaties: Sollicitatie[] = []
 
   @Input() vacature: Vacature = { id:0, titel: "", omschrijving: "", bedrijfId: 0, kwalificaties: "", datumSluiting: "", bedrijf: this.bedrijf, sollicitaties: this.sollicitaties }    // @Input() vacature: any;
@@ -49,11 +51,11 @@ export class VacatureDetailComponent implements OnInit {
   }
 
   edit(id: number) {
-    this.router.navigate(['editsollicitatie'], {state: {id: id, mode: 'editGebruiker'}});
+    this.router.navigate(['editsollicitatie'], {state: {id: this.sollicitatieId, mode: 'editDetail'}});
   }
 
   terug() {
-    this.router.navigate(['/vacature'])
+    this.router.navigate(['/'])
   }
 
 }

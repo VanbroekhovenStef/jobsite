@@ -19,8 +19,8 @@ export class SollicitatieService {
   getSollicitatiesFromUser(id: number): Observable<Sollicitatie[]> {
     return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?userId=' + id)
   }
-  getSollicitatiesOnVacatureFromUser(userId: string, vacatureId: string): Observable<Sollicitatie[]> {
-    return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?userId=' + userId + "&?vacatureId=" + vacatureId)
+  getSollicitatiesOnVacatureFromUser(userId: number, vacatureId: number): Observable<Sollicitatie> {
+    return this.httpClient.get<Sollicitatie>('https://localhost:44393/api/sollicitaties/FromUserOnVacature?userId=' + userId + "&vacatureId=" + vacatureId)
   }
 
   deleteSollicitatie(id: number): Observable<Sollicitatie> {

@@ -14,6 +14,10 @@ export class BedrijfService {
     return this.httpClient.get<Bedrijf[]>("https://localhost:44393/api/bedrijfs");
   }
 
+  getBedrijvenFromUser(id: number): Observable<Bedrijf[]> {
+    return this.httpClient.get<Bedrijf[]>("https://localhost:44393/api/bedrijfs?userId=" + id);
+  }
+
   getBedrijfById(id: number): Observable<Bedrijf> {
     return this.httpClient.get<Bedrijf>("https://localhost:44393/api/bedrijfs/" + id);
   }

@@ -17,6 +17,7 @@ export class SollicitatieFormComponent implements OnInit {
   isAdd: boolean = false;
   isEdit: boolean = false;
   isEditGebruiker: boolean = false;
+  isEditDetail: boolean = false;
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
@@ -41,7 +42,9 @@ export class SollicitatieFormComponent implements OnInit {
     this.isAdd = this.router.getCurrentNavigation()?.extras.state?.mode === 'add';
     this.isEdit = this.router.getCurrentNavigation()?.extras.state?.mode ==='edit';
     this.isEditGebruiker = this.router.getCurrentNavigation()?.extras.state?.mode ==='editGebruiker';
+    this.isEditDetail = this.router.getCurrentNavigation()?.extras.state?.mode ==='editDetail';
     this.vacatureId = +this.router.getCurrentNavigation()?.extras.state?.vacatureId;
+    console.log(this.vacatureId);
     this.sollicitatieId = +this.router.getCurrentNavigation()?.extras.state?.id;
 
     if (this.sollicitatieId != null && this.sollicitatieId > 0) {
@@ -106,7 +109,12 @@ export class SollicitatieFormComponent implements OnInit {
       this.putSollicitatie$ = this.sollicitatieService.putSollicitatie(this.sollicitatieId, this.sollicitatieForm.value).subscribe(result => {
         if(this.isEditGebruiker) {
           this.router.navigate(['/sollicitatie'], {state: {id: this.authService.getUser()?.id, mode: 'gebruiker'}})
-        } else {
+        }
+        else if(this.isEditDetail) {
+
+          this.router.navigate(['/vacature', this.sollicitatieForm.value.vacatureId])
+        }
+        else {
           this.router.navigate(['/sollicitatie'], {state: {id: this.sollicitatieId}})
         }
       },
