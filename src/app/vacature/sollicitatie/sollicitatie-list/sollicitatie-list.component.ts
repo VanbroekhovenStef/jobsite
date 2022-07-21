@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/security/auth.service';
 import { Sollicitatie } from '../sollicitatie';
 import { SollicitatieService } from '../sollicitatie.service';
 
@@ -11,7 +12,8 @@ import { SollicitatieService } from '../sollicitatie.service';
 })
 export class SollicitatieListComponent implements OnInit {
 
-  vacatureId: number = 0;
+  id: number = 0;
+  isGebruiker: boolean = false;
 
   sollicitaties: Sollicitatie[] = [];
   sollicitaties$: Subscription = new Subscription();
@@ -19,14 +21,18 @@ export class SollicitatieListComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private sollicitatieService: SollicitatieService, private router: Router) {
-    this.vacatureId = +this.router.getCurrentNavigation()?.extras.state?.id;
-    console.log(this.vacatureId);
+  constructor(private sollicitatieService: SollicitatieService, private router: Router, private authService: AuthService) {
+    this.id = +this.router.getCurrentNavigation()?.extras.state?.id;
+    this.isGebruiker = this.router.getCurrentNavigation()?.extras.state?.mode === 'gebruiker';
+    console.log(this.isGebruiker)
   }
 
   ngOnInit(): void {
-
-    this.getSollicitaties(this.vacatureId);
+    if (this.isGebruiker) {
+      this.getSollicitatiesFromUser(this.id)
+    } else {
+      this.getSollicitaties(this.id);
+    }
   }
 
   ngOnDestroy(): void {
@@ -41,13 +47,20 @@ export class SollicitatieListComponent implements OnInit {
 
   edit(id: number) {
     //TODO
-    this.router.navigate(['editsollicitatie/' + id]);
+    if (this.isGebruiker) {
+      this.router.navigate(['editsollicitatie'], {state: {id: id, mode: 'editGebruiker'}});
+    } else {
+      this.router.navigate(['editsollicitatie'], {state: {id: id, mode: 'edit'}});
+    }
   }
 
   delete(id: number) {
     this.deleteSollicitatie$ = this.sollicitatieService.deleteSollicitatie(id).subscribe(result => {
       //all went well
-      this.getSollicitaties(this.vacatureId);
+      this.getSollicitaties(this.id);
+      if (this.isGebruiker) {
+        this.router.navigate(['/sollicitatie'], {state: {id: this.authService.getUser()?.id, mode: 'gebruiker'}})
+      }
     }, error => {
       //error
       this.errorMessage = error.message;
@@ -58,17 +71,7 @@ export class SollicitatieListComponent implements OnInit {
     this.sollicitaties$ = this.sollicitatieService.getSollicitatiesFromVacature(id).subscribe(result => this.sollicitaties = result);
   }
 
-  // isUnpublished(sollicitatie: Article): boolean {
-  //   return sollicitatie.statusId !== StatusEnum.PUBLISHED;
-  // }
-
-  // publish(articleId: number): void {
-  //   this.articleService.publishArticle(articleId).subscribe(result => {
-  //     this.getArticles();
-  //   }, error => {
-  //     //error
-  //     this.errorMessage = error.message;
-  //   });
-  // }
-
+  getSollicitatiesFromUser(id: number) {
+    this.sollicitaties$ = this.sollicitatieService.getSollicitatiesFromUser(id).subscribe(result => this.sollicitaties = result);
+  }
 }

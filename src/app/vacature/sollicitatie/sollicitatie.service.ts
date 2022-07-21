@@ -16,6 +16,13 @@ export class SollicitatieService {
     return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?vacatureId=' + id);
   }
 
+  getSollicitatiesFromUser(id: number): Observable<Sollicitatie[]> {
+    return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?userId=' + id)
+  }
+  getSollicitatiesOnVacatureFromUser(userId: string, vacatureId: string): Observable<Sollicitatie[]> {
+    return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?userId=' + userId + "&?vacatureId=" + vacatureId)
+  }
+
   deleteSollicitatie(id: number): Observable<Sollicitatie> {
     return this.httpClient.delete<Sollicitatie>('https://localhost:44393/api/sollicitaties/' + id);
   }

@@ -8,6 +8,10 @@ import { BedrijfService } from './bedrijf.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from '../security/security.interceptor';
 import { BedrijfRoutingModule } from './bedrijf-routing.module';
+import { SecurityModule } from '../security/security.module';
+import {AngularFireModule} from '@angular/fire/compat';
+import {environment} from '../../environments/environment';
+import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 
 
 
@@ -20,7 +24,10 @@ import { BedrijfRoutingModule } from './bedrijf-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    BedrijfRoutingModule
+    BedrijfRoutingModule,
+    SecurityModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   exports: [
     BedrijfDetailComponent,

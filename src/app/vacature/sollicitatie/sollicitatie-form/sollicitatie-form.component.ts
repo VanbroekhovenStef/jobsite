@@ -16,6 +16,7 @@ export class SollicitatieFormComponent implements OnInit {
   vacatureId: number = 0;
   isAdd: boolean = false;
   isEdit: boolean = false;
+  isEditGebruiker: boolean = false;
 
   isSubmitted: boolean = false;
   errorMessage: string = '';
@@ -27,7 +28,7 @@ export class SollicitatieFormComponent implements OnInit {
   // imageSrc: string = '';
 
   sollicitatieForm = new FormGroup({
-    // id: new FormControl(''),
+    id: new FormControl(''),
     userId: new FormControl(''),
     vacatureId: new FormControl(''),
     motivatie: new FormControl('', [Validators.required])
@@ -39,56 +40,34 @@ export class SollicitatieFormComponent implements OnInit {
               private authService: AuthService) {
     this.isAdd = this.router.getCurrentNavigation()?.extras.state?.mode === 'add';
     this.isEdit = this.router.getCurrentNavigation()?.extras.state?.mode ==='edit';
+    this.isEditGebruiker = this.router.getCurrentNavigation()?.extras.state?.mode ==='editGebruiker';
     this.vacatureId = +this.router.getCurrentNavigation()?.extras.state?.vacatureId;
-    this.sollicitatieId = +this.router.getCurrentNavigation()?.extras.state?.sollicitatieId;
+    this.sollicitatieId = +this.router.getCurrentNavigation()?.extras.state?.id;
 
     if (this.sollicitatieId != null && this.sollicitatieId > 0) {
       this.sollicitatie$ = this.sollicitatieService.getSollicitatieById(this.sollicitatieId).subscribe(result => {
+        console.log(result);
         this.sollicitatieForm.setValue({
+          id: result.id,
           motivatie: result.motivatie,
           userId: result.userId,
           vacatureId: result.vacatureId
         })
       })
+    } else {
+      const user = this.authService.getUser() ?? null;
+
+      if (user !== null) {
+        this.sollicitatieForm.patchValue({
+          id: 0,
+          userId: user.id,
+          vacatureId: this.vacatureId
+        });
+      }
     }
   }
-
   ngOnInit(): void {
-    const user = this.authService.getUser() ?? null;
-
-    if (user !== null) {
-      this.sollicitatieForm.patchValue({
-        userId: user.id,
-        vacatureId: this.vacatureId
-      });
-    }
-    // // get article if in edit
-    // if (this.isEdit) {
-    //   const id = this.route.snapshot.paramMap.get('id');
-    //   if (id != null) {
-    //     this.sollicitatieId = +id;
-    //     this.sollicitatieService.getSollicitatieById(+id).subscribe(result => {
-    //       // this.imageSrc = result.imageUrl;
-    //       this.sollicitatieForm.patchValue({
-    //         id: result.id,
-    //         userId: result.userId,
-    //         vacatureId: result.vacatureId,
-    //         motivatie: result.motivatie
-    //       });
-    //     });
-    //   }
-    // }
-
-    // set user and vacature in form (= author)
-    // const author = this.authService.getUser() ?? null;
-    // const vacatureId = this.route.snapshot.paramMap.get('id');
-    // if (author !== null && vacatureId != null) {
-    //   this.vacatureId = +vacatureId;
-    //   this.sollicitatieForm.setValue({
-    //     userId: author.id,
-    //     vacatureId: this.vacatureId
-    //   });
-    // }
+    
   }
 
   ngOnDestroy(): void {
@@ -107,13 +86,7 @@ export class SollicitatieFormComponent implements OnInit {
 
   onSubmit(): void {
     this.isSubmitted = true;
-    this.postSollicitatie$ = this.sollicitatieService.postSollicitatie(this.sollicitatieForm.value).subscribe(result => {
-      this.router.navigateByUrl('/');
-    },
-    error => {
-      this.isSubmitted = false;
-      this.errorMessage = error.message;
-    });
+    this.submitData();
   }
 
   submitData(): void {
@@ -126,16 +99,23 @@ export class SollicitatieFormComponent implements OnInit {
           this.isSubmitted = false;
           this.errorMessage = error.message;
         });
-    } else {
+    } 
+    else {
       //edit
+      console.log(this.sollicitatieForm.value);
       this.putSollicitatie$ = this.sollicitatieService.putSollicitatie(this.sollicitatieId, this.sollicitatieForm.value).subscribe(result => {
-          this.router.navigateByUrl('/');
-        },
+        if(this.isEditGebruiker) {
+          this.router.navigate(['/sollicitatie'], {state: {id: this.authService.getUser()?.id, mode: 'gebruiker'}})
+        } else {
+          this.router.navigate(['/sollicitatie'], {state: {id: this.sollicitatieId}})
+        }
+      },
         error => {
           this.isSubmitted = false;
           this.errorMessage = error.message;
         });
     }
+
+    }
   }
 
-}

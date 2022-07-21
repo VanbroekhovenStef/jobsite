@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bedrijf } from 'src/app/bedrijf/bedrijf';
-import { User } from 'src/app/user/user';
+import { User } from 'src/app/admin/user/user';
 import { Sollicitatie } from '../sollicitatie/sollicitatie';
 import { Vacature } from '../vacature';
 import { VacatureService } from '../vacature.service';

@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 export interface User {
     id: number;
     naam: string;
@@ -9,4 +11,6 @@ export interface User {
     cv?: string;
     linkedIn?: string;
     roleId: number;
+    role: Role;
+    foto: string;
 }

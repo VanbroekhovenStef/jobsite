@@ -12,6 +12,6 @@
   </div>
   <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!sollicitatieForm.valid || isSubmitted">Versturen
   </button>
-  <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!sollicitatieForm.valid || isSubmitted">Bewerking opslaan
+  <button type="submit" class="btn btn-primary" *ngIf="isEdit || isEditGebruiker" [disabled]="!sollicitatieForm.valid || isSubmitted">Bewerking opslaan
   </button>
 </form>

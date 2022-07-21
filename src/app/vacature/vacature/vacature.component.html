@@ -1,8 +1,9 @@
 <article class="col-sm-12 col-md-12, col-lg-6, col-xl-4  d-flex align-items-stretch" *ngFor="let vacature of vacatures" >
     <h3>{{vacature.titel}}</h3>
-    <h4>{{vacature.bedrijfId}}</h4>
+    <h4>{{vacature.bedrijf.naam}}</h4>
+    <p>{{vacature.bedrijf.omschrijving}}</p>
     <figure>
-        <img src="" alt="{{vacature.bedrijfId}}">
+        <img src="{{vacature.bedrijf.foto}}" alt="{{vacature.bedrijf.naam}}">
         <figcaption></figcaption>
     </figure>
     <p>
@@ -13,7 +14,6 @@
         <p>{{vacature.omschrijving | shortenContent : 250}}</p>
     </section>
     <footer>
-        <p>{{vacature.bedrijfId}}</p>
     </footer>
     <p>Aantal sollicitaties <span>{{vacature.sollicitaties.length}}</span></p>
 </article>

@@ -5,18 +5,26 @@
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Naam</th>
-      <th scope="col">Email</th>
-      <th scope="col">Motivatie</th>
+      <th *ngIf="isGebruiker" scope="col">Functie</th>
+      <th *ngIf="isGebruiker" scope="col">Omschrijving</th>
+      <th *ngIf="isGebruiker" scope="col">Bedrijf</th>
+      <th *ngIf="isGebruiker" scope="col">Aantal concurrenten</th>
+      <th *ngIf="!isGebruiker" scope="col">Naam</th>
+      <th *ngIf="!isGebruiker" scope="col">Email</th>
+      <th *ngIf="!isGebruiker" scope="col">Motivatie</th>
       <th scope="col">Acties</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let sollicitatie of sollicitaties">
       <th scope="row">{{sollicitatie.id}}</th>
-      <td>{{sollicitatie.user.naam}}</td>
-      <td>{{sollicitatie.user.email}}</td>
-      <td>{{sollicitatie.motivatie}}</td>
+      <td *ngIf="isGebruiker">{{sollicitatie.vacature.titel}}</td>
+      <td *ngIf="isGebruiker">{{sollicitatie.vacature.omschrijving}}</td>
+      <td *ngIf="isGebruiker">{{sollicitatie.vacature.bedrijf.naam}}</td>
+      <td *ngIf="isGebruiker">{{sollicitatie.vacature.sollicitaties.length}}</td>
+      <td *ngIf="!isGebruiker">{{sollicitatie.user.voornaam}} {{sollicitatie.user.naam}}</td>
+      <td *ngIf="!isGebruiker">{{sollicitatie.user.email}}</td>
+      <td *ngIf="!isGebruiker">{{sollicitatie.motivatie}}</td>
       <td>
         <button type="button" class="btn btn-success" (click)="edit(sollicitatie.id)"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-danger" (click)="delete(sollicitatie.id)"><i class="far fa-trash-alt"></i></button>

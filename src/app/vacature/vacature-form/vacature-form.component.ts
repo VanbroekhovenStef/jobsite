@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bedrijf } from 'src/app/bedrijf/bedrijf';
 import { BedrijfService } from 'src/app/bedrijf/bedrijf.service';
-import { User } from 'src/app/user/user';
+import { User } from 'src/app/admin/user/user';
 import { VacatureService } from '../vacature.service';
 
 @Component({

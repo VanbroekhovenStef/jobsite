@@ -7,10 +7,8 @@ import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { VacatureModule } from './vacature/vacature.module';
-import { BedrijfModule } from './bedrijf/bedrijf.module';
-import { UserModule } from './user/user.module';
 import { SecurityModule } from './security/security.module';
-import { SollicitatieModule } from './vacature/sollicitatie/sollicitatie.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +21,8 @@ import { SollicitatieModule } from './vacature/sollicitatie/sollicitatie.module'
     AppRoutingModule,
     SharedModule,
     VacatureModule,
-    UserModule,
-    SecurityModule
+    SecurityModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

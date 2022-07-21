@@ -1,0 +1,17 @@
+<article>
+    <h3>{{user.voornaam}} {{user.naam}}</h3>
+    <figure>
+        <img src="{{user.foto}}" alt="{{user.voornaam}} {{user.naam}}" width="300">
+        <figcaption></figcaption>
+    </figure>
+    <h4>Persoonlijke gegevens</h4>
+    <section>
+        <p>Email: {{user.email}}</p>
+        <p>Adres: {{user.adres}}</p>
+        <p>Telefoonnummer: {{user.telefoon}}</p>
+        <p>LinkedIn profiel: <a href="{{user.linkedIn}}">{{user.linkedIn}}</a></p>
+        <p>Rol: {{user.role.name}}</p>
+    </section>
+    <button type="button" class="btn btn-success" routerLink="/vacature">Terug</button>
+    <button type="button" class="btn btn-primary" (click)="edit(user.id)">Profiel bewerken</button>
+</article>

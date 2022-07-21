@@ -33,6 +33,11 @@ export class AuthService {
 
   deleteToken(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('voornaam');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+
   }
 
   isLoggedIn(): boolean {

@@ -1,8 +1,8 @@
 <article>
     <h3>{{vacature.titel}}</h3>
-    <h4>{{vacature.bedrijfId}}</h4>
+    <h4>{{vacature.bedrijf.naam}}</h4>
     <figure>
-        <img src="" alt="{{vacature.bedrijfId}}">
+        <img src="{{vacature.bedrijf.foto}}" alt="{{vacature.bedrijf.naam}}">
         <figcaption></figcaption>
     </figure>
     <section>
@@ -13,9 +13,7 @@
         <h4>Kwalificaties</h4>
         <p>{{vacature.kwalificaties}}</p>
     </section>
-    <footer>
-        <p>{{vacature.bedrijfId}}</p>
-    </footer>
     <button type="button" class="btn btn-success" (click)="terug()">Terug</button>
-    <button type="button" class="btn btn-primary" (click)="solliciteren(vacature.id)">Solliciteren</button>
+    <button *ngIf="!heeftGesolliciteerd"type="button" class="btn btn-primary" (click)="solliciteren(vacature.id)">Solliciteren</button>
+    <button *ngIf="heeftGesolliciteerd" type="button" class="btn btn-primary" (click)="edit(vacature.id)">Sollicitatie bewerken</button>
 </article>

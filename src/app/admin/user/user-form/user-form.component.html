@@ -1,0 +1,62 @@
+<div class="alert alert-danger" role="alert" *ngIf="isSubmitted && errorMessage">
+    {{errorMessage}}
+</div>
+<div class="alert alert-warning" role="warning">
+    <p>Form Status: {{ userForm.status }}</p>
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+    <div class="form-group">
+        <label for="naam">Naam</label>
+        <input type="text" class="form-control" id="naam" name="naam" placeholder="naam" formControlName="naam" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="voornaam">Voornaam</label>
+        <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="Voornaam" formControlName="voornaam" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Voornaam" formControlName="email" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="adres">Adres</label>
+        <input type="text" class="form-control" id="adres" name="adres" placeholder="adres" formControlName="adres" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="telefoon">Telefoonnummer</label>
+        <input type="text" class="form-control" id="telefoon" name="telefoon" placeholder="telefoon" formControlName="telefoon" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="linkedIn">LinkedIn</label>
+        <input type="text" class="form-control" id="linkedIn" name="linkedIn" placeholder="linkedIn" formControlName="linkedIn" minlength="2">
+    </div>
+    <div class="form-group" *ngIf="authService.isLoggedIn() && authService.isSuperadmin()">
+        <label for="roleId">Usereigenschappen</label>
+        <select class="custom-select" formControlName="roleId" id="roleId">
+            <option value="" disabled>Kies een rol</option>
+            <option *ngFor="let role of roles" [ngValue]="role.id">{{role.name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="wachtwoord">Wachtwoord</label>
+        <input type="password" class="form-control" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" formControlName="wachtwoord" minlength="2">
+    </div>
+    <div class="form-group">
+        <label for="foto">Foto</label>
+        <input
+            id="foto"
+            type="file"
+            class="form-control"
+            autocomplete="off"
+            (change)="onImageSelected($event)"
+            accept=".png,.jpg">
+        <div *ngIf="isSubmitted && uploadProgress">
+        <progress max="100" [value]="(uploadProgress)"></progress>
+    </div>
+    </div>
+    <div *ngIf="(isEditAdmin || isEditGebruiker) && imageSrc">
+        <img src="{{imageSrc}}" alt="user image" width="300">
+    </div>
+    <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!userForm.valid || isSubmitted">Toevoegen</button>
+    <button type="submit" class="btn btn-primary" *ngIf="isEditAdmin || isEditGebruiker" [disabled]="!userForm.valid || isSubmitted">Opslaan</button>
+    <button type="submit" class="btn btn-secondary" routerLink="/user">Terug</button>
+</form>

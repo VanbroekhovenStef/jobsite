@@ -6,25 +6,38 @@
 </div>
 <form (ngSubmit)="onSubmit()" [formGroup]="bedrijfForm">
     <div class="form-group">
-      <label for="name">Naam</label>
+      <label for="naam">Naam</label>
       <input type="text" class="form-control" id="naam" name="naam" placeholder="naam" formControlName="naam" minlength="2">
     </div>
     <div class="form-group">
-        <label for="name">Adres</label>
+        <label for="adres">Adres</label>
         <input type="text" class="form-control" id="adres" name="adres" placeholder="adres" formControlName="adres" minlength="2">
       </div>
       <div class="form-group">
-        <label for="name">Omschrijving</label>
+        <label for="omschrijving">Omschrijving</label>
         <input type="text" class="form-control" id="omschrijving" name="omschrijving" placeholder="omschrijving" formControlName="omschrijving" minlength="2">
       </div>
       <div class="form-group">
-        <label for="name">Telefoonnummer</label>
+        <label for="telefoon">Telefoonnummer</label>
         <input type="text" class="form-control" id="telefoon" name="telefoon" placeholder="telefoon" formControlName="telefoon" minlength="2">
       </div>
       <div class="form-group">
-        <label for="name">Foto</label>
-        <input type="text" class="form-control" id="foto" name="foto" placeholder="foto" formControlName="foto" minlength="2">
+        <label for="foto">Foto</label>
+        <input
+          id="foto"
+          type="file"
+          class="form-control"
+          autocomplete="off"
+          (change)="onImageSelected($event)"
+          accept=".png,.jpg">
+        <div *ngIf="isSubmitted && uploadProgress">
+          <progress max="100" [value]="(uploadProgress)"></progress>
+        </div>
+      </div>
+      <div *ngIf="isEdit && imageSrc">
+        <img src="{{imageSrc}}" alt="user image">
       </div>
     <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!bedrijfForm.valid || isSubmitted">Add</button>
     <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!bedrijfForm.valid || isSubmitted">Save</button>
+    <button type="submit" class="btn btn-secondary"></button>
 </form>
