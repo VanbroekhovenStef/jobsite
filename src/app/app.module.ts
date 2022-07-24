@@ -21,8 +21,12 @@ import { AdminModule } from './admin/admin.module';
     AppRoutingModule,
     SharedModule,
     VacatureModule,
-    SecurityModule,
-    AdminModule
+    SecurityModule
+  ],
+  exports: [
+    AppComponent,
+    MenuComponent,
+    HomeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

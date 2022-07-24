@@ -31,12 +31,12 @@ export class UserListComponent implements OnInit {
 
   add() {
     //Navigate to form in add mode
-    this.router.navigate(['/user/form'], {state: {mode: 'add'}});
+    this.router.navigate(['/admin/user/form'], {state: {mode: 'add'}});
   }
 
   edit(id: number) {
     //Navigate to form in edit mode
-    this.router.navigate(['/user/form'], {state: {id: id, mode: 'editAdmin'}});
+    this.router.navigate(['/admin/user/form'], {state: {id: id, mode: 'editAdmin'}});
   }
 
   delete(id: number) {

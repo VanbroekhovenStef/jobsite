@@ -1,4 +1,4 @@
-<article class="col-sm-12 col-md-12, col-lg-6, col-xl-4  d-flex align-items-stretch" *ngFor="let vacature of vacatures" >
+<article *ngIf="vacature">
     <h3>{{vacature.titel}}</h3>
     <h4>{{vacature.bedrijf.naam}}</h4>
     <p>{{vacature.bedrijf.omschrijving}}</p>

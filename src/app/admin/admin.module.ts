@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UserModule } from './user/user.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from '../security/security.interceptor';
+import { AdminRoutingModule } from './admin-routing.module';
 
 
 
@@ -12,6 +13,7 @@ import { SecurityInterceptor } from '../security/security.interceptor';
   ],
   imports: [
     SharedModule,
+    AdminRoutingModule,
     UserModule
   ],
   providers: [

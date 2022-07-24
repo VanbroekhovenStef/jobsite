@@ -39,5 +39,5 @@
       </div>
     <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!bedrijfForm.valid || isSubmitted">Add</button>
     <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!bedrijfForm.valid || isSubmitted">Save</button>
-    <button type="submit" class="btn btn-secondary"></button>
+    <button type="submit" class="btn btn-secondary" routerLink="/admin/user">Terug</button>
 </form>

@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
 
   profielBeheren(id: number) {
       //Navigate to form in edit mode
-      this.router.navigate(['/user', id]);
+      this.router.navigate(['/admin/user', id]);
   }
 
   overzichtSollicitaties(id: number) {

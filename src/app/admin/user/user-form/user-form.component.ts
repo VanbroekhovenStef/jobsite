@@ -139,7 +139,7 @@ export class UserFormComponent implements OnInit {
     if (this.isAdd) {
       this.postUser$ = this.userService.postUser(this.userForm.value).subscribe(result => {
                 //all went well
-                this.router.navigateByUrl("/user");
+                this.router.navigateByUrl("/admin/user");
               },
               error => {
                 this.isSubmitted = false;
@@ -149,7 +149,7 @@ export class UserFormComponent implements OnInit {
     if (this.isEditAdmin) {
       this.putUser$ = this.userService.putUser(this.userId, this.userForm.value).subscribe(result => {
                 //all went well
-                this.router.navigateByUrl("/user");
+                this.router.navigateByUrl("/admin/user");
               },
               error => {
                 this.isSubmitted = false;
@@ -159,7 +159,7 @@ export class UserFormComponent implements OnInit {
     if (this.isEditGebruiker) {
       this.putUser$ = this.userService.putUser(this.userId, this.userForm.value).subscribe(result => {
         //all went well
-        this.router.navigate(['/user', this.userId])
+        this.router.navigate(['/admin/user', this.userId])
       },
       error => {
         this.isSubmitted = false;

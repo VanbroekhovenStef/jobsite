@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Bedrijf } from '../bedrijf/bedrijf';
+import { BedrijfService } from '../bedrijf/bedrijf.service';
 import { Vacature } from '../vacature/vacature';
 import { VacatureService } from '../vacature/vacature.service';
 
@@ -11,19 +14,50 @@ import { VacatureService } from '../vacature/vacature.service';
 })
 export class HomeComponent implements OnInit {
 
-  // vacatures: Vacature[] = [];
-  // vacatures$: Subscription = new Subscription();
-  // deleteVacature$: Subscription = new Subscription();
+  vacatures: Vacature[] = [];
+  vacatures$: Subscription = new Subscription();
 
-  // errorMessage: string = '';
+  bedrijven: Bedrijf[] = [];
+  bedrijven$: Subscription = new Subscription();
 
-  constructor(private vacatureService: VacatureService, private router: Router) { }
+  errorMessage: string = '';
 
-  ngOnInit(): void {
-    // this.getVacatures();
+  filterForm = new FormGroup({
+    bedrijfId: new FormControl(''),
+    titel: new FormControl('')
+  })
+
+  constructor(private vacatureService: VacatureService, private router: Router, private bedrijfService: BedrijfService) { 
+
   }
 
-  // getVacatures() {
-  //   this.vacatures$ = this.vacatureService.getVacatures().subscribe(result => this.vacatures = result);
-  // }
+  ngOnInit(): void {
+    this.getVacatures();
+
+    this.getBedrijven();
+  }
+
+  ngOnDestroy(): void {
+    this.vacatures$.unsubscribe();
+    this.bedrijven$.unsubscribe();
+  }
+
+  onFilter() {
+    this.getVacatures(this.filterForm.value.bedrijfId, this.filterForm.value.titel);
+  }
+
+  getVacatures(bedrijfId?: number, titel?: string) {
+    console.log(bedrijfId, titel);
+    this.vacatures$ = this.vacatureService.getVacatures(bedrijfId, titel, true).subscribe(result => {
+      this.vacatures = result;
+      console.log(this.vacatures);
+    });
+  }
+
+  getBedrijven() {
+    this.bedrijven$ = this.bedrijfService.getBedrijven().subscribe(result => {
+      this.bedrijven = result;
+    });
+  }
+
 }

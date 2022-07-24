@@ -6,6 +6,7 @@ import { User } from 'src/app/admin/user/user';
 import { Sollicitatie } from '../sollicitatie/sollicitatie';
 import { Vacature } from '../vacature';
 import { VacatureService } from '../vacature.service';
+import { Role } from 'src/app/admin/user/role';
 
 @Component({
   selector: 'app-vacature',
@@ -15,19 +16,19 @@ import { VacatureService } from '../vacature.service';
 export class VacatureComponent implements OnInit {
 
   vacatures: Vacature[] = [];
-  vacatures$: Subscription = new Subscription();
-  deleteVacature$: Subscription = new Subscription();
+  sollicitaties: Sollicitatie[] = []
 
-  errorMessage: string = '';
+  role: Role = { id: 0, name: "" };
+  user: User = { id: 0, naam: "", voornaam: "", email: "", wachtwoord: "", adres: "", telefoon: "", cv: "", linkedIn: "", roleId: 0, foto: "", role: this.role }
+  bedrijf: Bedrijf = { id: 0, naam: "", omschrijving: "", userId: 0, user: this.user, adres: "", foto: "", telefoon: "", vacatures: this.vacatures }
 
-  constructor(private vacatureService: VacatureService, private router: Router) { }
+  @Input() vacature: Vacature = { id:0 , titel: "", omschrijving: "", bedrijfId: 0, kwalificaties: "", datumSluiting: "", bedrijf: this.bedrijf, sollicitaties: this.sollicitaties }    // @Input() vacature: any;
+
+  constructor(private vacatureService: VacatureService, private router: Router) {
+    console.log(this.vacature);
+   }
 
   ngOnInit(): void {
-    this.getVacatures();
-  }
-
-  getVacatures() {
-    this.vacatures$ = this.vacatureService.getVacatures().subscribe(result => this.vacatures = result);
   }
 
   detail(id: number) {

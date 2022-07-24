@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
@@ -31,11 +31,11 @@ export class BedrijfFormComponent implements OnInit {
   // reactive form
   bedrijfForm = new FormGroup({
     id: new FormControl(0),
-    naam: new FormControl(''),
-    adres: new FormControl(''),
-    omschrijving: new FormControl(''),
+    naam: new FormControl('', [Validators.required]),
+    adres: new FormControl('', [Validators.required]),
+    omschrijving: new FormControl('', [Validators.required]),
     foto: new FormControl(''),
-    telefoon: new FormControl(''),
+    telefoon: new FormControl('', [Validators.required]),
     userId: new FormControl(0)
   });
 

@@ -25,7 +25,7 @@
                     <a class="nav-link" (click)="bedrijvenBeherenAdmin()">Bedrijven beheren</a>
                 </li>   
                 <li *ngIf="authService.isLoggedIn() && authService.isSuperadmin()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a class="nav-link" routerLink="/user">Users beheren</a>
+                    <a class="nav-link" routerLink="/admin/user">Users beheren</a>
                 </li>          
             </ul>
             <ul class="navbar-nav ml-auto">

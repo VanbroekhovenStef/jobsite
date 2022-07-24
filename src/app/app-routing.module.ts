@@ -25,9 +25,8 @@ const routes: Routes = [
   { path: 'vacature', component: VacatureListComponent },
   { path: 'vacature/form', component: VacatureFormComponent },
   { path: 'vacature/:id', component: VacatureDetailComponent },
-  { path: 'user', component: UserListComponent, canActivate: [SuperadminGuard] },
-  { path: 'user/form', component: UserFormComponent, canActivate: [AuthGuard] },
-  { path: 'user/:id', component: UserDetailComponent, canActivate: [AuthGuard] },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard], canActivateChild: [AuthGuard] },
+  // { path: 'vacature', },
   { path: 'sollicitatie', component: SollicitatieListComponent, canActivate: [AuthGuard] },
   { path: 'newsollicitatie', component: SollicitatieFormComponent, canActivate: [AuthGuard] },
   { path: 'editsollicitatie', component: SollicitatieFormComponent, canActivate: [AuthGuard] }
