@@ -8,7 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { VacatureModule } from './vacature/vacature.module';
 import { SecurityModule } from './security/security.module';
-import { AdminModule } from './admin/admin.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SecurityInterceptor } from './security/security.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,13 @@ import { AdminModule } from './admin/admin.module';
     MenuComponent,
     HomeComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
