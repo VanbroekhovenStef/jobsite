@@ -56,7 +56,7 @@ export class BedrijfListComponent implements OnInit {
   delete(id: number) {
     this.deleteBedrijf$ = this.bedrijfService.deleteBedrijf(id).subscribe(result => {
       //all went well
-      if (this.userId != null && this.userId > 0) {
+      if (this.userId != null && this.userId == 2) {
         this.getBedrijvenFromUser()
       } else {
         this.getBedrijven();

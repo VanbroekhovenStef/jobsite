@@ -58,5 +58,5 @@
     </div>
     <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!userForm.valid || isSubmitted">Toevoegen</button>
     <button type="submit" class="btn btn-primary" *ngIf="isEditAdmin || isEditGebruiker" [disabled]="!userForm.valid || isSubmitted">Opslaan</button>
-    <button type="submit" class="btn btn-secondary" routerLink="/admin/user">Terug</button>
+    <button type="submit" class="btn btn-success" routerLink="/admin/user">Terug</button>
 </form>

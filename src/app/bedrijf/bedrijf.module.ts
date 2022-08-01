@@ -12,6 +12,8 @@ import { SecurityModule } from '../security/security.module';
 import {AngularFireModule} from '@angular/fire/compat';
 import {environment} from '../../environments/environment';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import { VacatureModule } from '../vacature/vacature.module';
+import { AppModule } from '../app.module';
 
 
 
@@ -27,7 +29,8 @@ import {AngularFireStorageModule} from '@angular/fire/compat/storage';
     BedrijfRoutingModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    VacatureModule
   ],
   exports: [
     BedrijfDetailComponent,

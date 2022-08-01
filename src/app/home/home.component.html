@@ -1,18 +1,19 @@
 <h1>Welcome op deze jobsite</h1>
 <form (ngSubmit)="onFilter()" [formGroup]="filterForm">
     <div class="row">
-        <div class="form-group col-sm-5">
+        <div class="form-group col-sm-4">
             <label for="bedrijfId">Bedrijf</label>
             <select class="custom-select" formControlName="bedrijfId" id="bedrijfId">
                 <option value="">Kies een bedrijf</option>
                 <option *ngFor="let bedrijf of bedrijven" [ngValue]="bedrijf.id">{{bedrijf.naam}} ({{bedrijf.vacatures.length}})</option>
             </select>
         </div>
-        <div class="form-group col-sm-5">
+        <div class="form-group col-sm-4">
             <label for="titel">Titel</label>
             <input type="text" class="form-control" id="titel" name="titel" placeholder="Titel" formControlName="titel" minlength="2">
-          </div>
+        </div>
         <button type="submit" class="btn btn-primary col-sm-2">Zoeken</button>
+        <button type="button" class="btn btn-secondary col-sm-1" (click)="sort()"><i class="fas fa-sort"></i></button>
     </div>
 </form>
 

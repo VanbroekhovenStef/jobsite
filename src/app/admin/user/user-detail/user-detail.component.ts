@@ -31,11 +31,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   edit(id: number) {
-    this.router.navigate(['/user/form'], {state: {id: id, mode: 'editGebruiker'}});
+    this.router.navigate(['/admin/user/form'], {state: {id: id, mode: 'editGebruiker'}});
   }
 
   back(): void {
-    this.location.back();
+    this.router.navigate(['/']);
   }
 
 }

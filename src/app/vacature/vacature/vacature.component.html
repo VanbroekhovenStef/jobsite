@@ -14,7 +14,8 @@
         <p>{{vacature.omschrijving | shortenContent : 250}}</p>
     </section>
     <footer>
+        <p><i>Vacature beschikbaar tot: {{vacature.datumSluiting | date: 'd/M/yyyy'}}</i></p>
+        <p>Aantal sollicitaties <span>{{vacature.sollicitaties.length}}</span></p>
     </footer>
-    <p>Aantal sollicitaties <span>{{vacature.sollicitaties.length}}</span></p>
 </article>
 

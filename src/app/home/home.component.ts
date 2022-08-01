@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   bedrijven: Bedrijf[] = [];
   bedrijven$: Subscription = new Subscription();
 
+  ascending: boolean = true;
+
   errorMessage: string = '';
 
   filterForm = new FormGroup({
@@ -47,10 +49,8 @@ export class HomeComponent implements OnInit {
   }
 
   getVacatures(bedrijfId?: number, titel?: string) {
-    console.log(bedrijfId, titel);
     this.vacatures$ = this.vacatureService.getVacatures(bedrijfId, titel, true).subscribe(result => {
       this.vacatures = result;
-      console.log(this.vacatures);
     });
   }
 
@@ -58,6 +58,24 @@ export class HomeComponent implements OnInit {
     this.bedrijven$ = this.bedrijfService.getBedrijven().subscribe(result => {
       this.bedrijven = result;
     });
+  }
+
+  sort() {
+    if (this.ascending) {
+      this.vacatures = this.vacatures.sort(
+        (a, b) => 
+          Number(Date.parse(a.datumSluiting)) - Number(Date.parse(b.datumSluiting))
+      );
+      console.log(this.vacatures)
+    } else {
+      this.vacatures = this.vacatures.sort(
+        (a, b) => 
+          Number(Date.parse(b.datumSluiting)) - Number(Date.parse(a.datumSluiting))
+      );
+      console.log(this.vacatures)
+    }
+    
+    this.ascending = !this.ascending;
   }
 
 }

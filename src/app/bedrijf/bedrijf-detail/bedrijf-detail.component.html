@@ -1,1 +1,25 @@
-<p>bedrijf-detail works!</p>
+<article>
+    <h3>{{bedrijf.naam}}</h3>
+    <figure>
+        <img src="{{bedrijf.foto}}" alt="{{bedrijf.naam}}">
+        <figcaption></figcaption>
+    </figure>
+    <section>
+        <h4>Beschrijving</h4>
+        <p>{{bedrijf.omschrijving}}</p>
+    </section>
+    <section>
+        <h4>Bedrijfsgegevens</h4>
+        <p>Adres: {{bedrijf.adres}}</p>
+        <p>Telefoon: {{bedrijf.telefoon}}</p>
+        <p>Algemene info: {{bedrijf.omschrijving}}</p>
+    </section>
+    <br>
+    <section>
+        <h4>Openstaande vacatures</h4>
+        <div class="row">
+            <app-vacature class="col-sm-12 col-md-12, col-lg-6, col-xl-4  d-flex align-items-stretch" *ngFor="let vacature of vacatures" [vacature]="vacature"></app-vacature>
+        </div>
+    </section>
+    <button type="button" class="btn btn-success" (click)="terug()">Terug</button>
+</article>

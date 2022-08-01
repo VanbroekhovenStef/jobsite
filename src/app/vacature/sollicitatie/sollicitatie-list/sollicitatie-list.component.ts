@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,7 +22,7 @@ export class SollicitatieListComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private sollicitatieService: SollicitatieService, private router: Router, private authService: AuthService) {
+  constructor(private sollicitatieService: SollicitatieService, private router: Router, private authService: AuthService, private location: Location) {
     this.id = +this.router.getCurrentNavigation()?.extras.state?.id;
     this.isGebruiker = this.router.getCurrentNavigation()?.extras.state?.mode === 'gebruiker';
     console.log(this.isGebruiker)
@@ -73,5 +74,9 @@ export class SollicitatieListComponent implements OnInit {
 
   getSollicitatiesFromUser(id: number) {
     this.sollicitaties$ = this.sollicitatieService.getSollicitatiesFromUser(id).subscribe(result => this.sollicitaties = result);
+  }
+
+  terug() {
+    this.location.back();
   }
 }

@@ -25,7 +25,6 @@ export class VacatureComponent implements OnInit {
   @Input() vacature: Vacature = { id:0 , titel: "", omschrijving: "", bedrijfId: 0, kwalificaties: "", datumSluiting: "", bedrijf: this.bedrijf, sollicitaties: this.sollicitaties }    // @Input() vacature: any;
 
   constructor(private vacatureService: VacatureService, private router: Router) {
-    console.log(this.vacature);
    }
 
   ngOnInit(): void {

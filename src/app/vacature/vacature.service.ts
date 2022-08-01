@@ -22,6 +22,10 @@ export class VacatureService {
     return this.httpClient.get<Vacature[]>("https://localhost:44393/api/vacatures?bedrijfId=" + bedrijfId + "&titel=" + titel + "&active=" + active);
   }
 
+  getVacaturesFromBedrijf(bedrijfId: number) : Observable<Vacature[]> {
+    return this.httpClient.get<Vacature[]>("https://localhost:44393/api/vacatures?bedrijfId=" + bedrijfId);
+  }
+
   getVacatureById(id: number): Observable<Vacature> {
     return this.httpClient.get<Vacature>("https://localhost:44393/api/vacatures/" + id);
   }

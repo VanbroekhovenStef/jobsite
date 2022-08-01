@@ -73,6 +73,10 @@ export class SollicitatieFormComponent implements OnInit {
     
   }
 
+  terug(id: number) {
+    this.router.navigate(['/vacature', id])
+  }
+
   ngOnDestroy(): void {
     this.sollicitatie$.unsubscribe();
     this.postSollicitatie$.unsubscribe();

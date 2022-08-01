@@ -6,6 +6,8 @@ import { Bedrijf } from 'src/app/bedrijf/bedrijf';
 import { BedrijfService } from 'src/app/bedrijf/bedrijf.service';
 import { User } from 'src/app/admin/user/user';
 import { VacatureService } from '../vacature.service';
+import { Location } from '@angular/common';
+import { AuthService } from 'src/app/security/auth.service';
 
 @Component({
   selector: 'app-vacature-form',
@@ -39,7 +41,7 @@ export class VacatureFormComponent implements OnInit {
 
   bedrijven: Bedrijf[] = [];
 
-  constructor(private router: Router, private vacatureService: VacatureService, private bedrijfService: BedrijfService) {
+  constructor(private router: Router, private vacatureService: VacatureService, private bedrijfService: BedrijfService, private location: Location, private authService: AuthService) {
     this.isAdd = this.router.getCurrentNavigation()?.extras.state?.mode === 'add';
     this.isEdit = this.router.getCurrentNavigation()?.extras.state?.mode === 'edit';
     this.vacatureId = +this.router.getCurrentNavigation()?.extras.state?.id;
@@ -60,7 +62,7 @@ export class VacatureFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bedrijven$ = this.bedrijfService.getBedrijven().subscribe(result => {
+    this.bedrijven$ = this.bedrijfService.getBedrijvenFromUser(Number(this.authService.getUser()?.id)).subscribe(result => {
       this.bedrijven = result;
     });
     
@@ -94,6 +96,10 @@ export class VacatureFormComponent implements OnInit {
                 this.errorMessage = error.message;
               });
     }
+  }
+
+  terug() {
+    this.location.back();
   }
 
 }

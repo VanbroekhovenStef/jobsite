@@ -1,6 +1,7 @@
 <article>
     <h3>{{vacature.titel}}</h3>
     <h4>{{vacature.bedrijf.naam}}</h4>
+    
     <figure>
         <img src="{{vacature.bedrijf.foto}}" alt="{{vacature.bedrijf.naam}}">
         <figcaption></figcaption>
@@ -13,7 +14,18 @@
         <h4>Kwalificaties</h4>
         <p>{{vacature.kwalificaties}}</p>
     </section>
-    <button type="button" class="btn btn-success" (click)="terug()">Terug</button>
+    <section>
+        <p><i>Sollicitatie in te dienen voor: {{vacature.datumSluiting | date: 'd/M/yyyy'}}</i></p>
+    </section>
+    <br>
+    <section>
+        <h4>Gegevens van het bedrijf</h4>
+        <p>Adres: {{vacature.bedrijf.adres}}</p>
+        <p>Telefoon: {{vacature.bedrijf.telefoon}}</p>
+        <p>Algemene info: {{vacature.bedrijf.omschrijving}}</p>
+        <p><a href="bedrijf/{{vacature.bedrijfId}}">Meer informatie over bedrijf</a></p>
+    </section>
     <button *ngIf="!heeftGesolliciteerd"type="button" class="btn btn-primary" (click)="solliciteren(vacature.id)">Solliciteren</button>
     <button *ngIf="heeftGesolliciteerd" type="button" class="btn btn-primary" (click)="edit(vacature.id)">Sollicitatie bewerken</button>
+    <button type="button" class="btn btn-success" (click)="terug()">Terug</button>
 </article>

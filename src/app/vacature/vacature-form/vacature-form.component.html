@@ -30,4 +30,5 @@
 </div>
     <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!vacatureForm.valid || isSubmitted">Toevoegen</button>
     <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!vacatureForm.valid || isSubmitted">Opslaan</button>
+    <button type="button" class="btn btn-success" (click)="terug()">Terug</button>
 </form>
