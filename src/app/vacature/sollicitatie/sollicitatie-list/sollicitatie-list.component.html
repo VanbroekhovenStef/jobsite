@@ -26,7 +26,7 @@
       <td *ngIf="!isGebruiker">{{sollicitatie.user.email}}</td>
       <td *ngIf="!isGebruiker">{{sollicitatie.motivatie}}</td>
       <td>
-        <button type="button" class="btn btn-success" (click)="edit(sollicitatie.id)"><i class="fas fa-edit"></i></button>
+        <button *ngIf="isGebruiker" type="button" class="btn btn-success" (click)="edit(sollicitatie.id)"><i class="fas fa-edit"></i></button>
         <button type="button" class="btn btn-danger" (click)="delete(sollicitatie.id)"><i class="far fa-trash-alt"></i></button>
       </td>
     </tr>

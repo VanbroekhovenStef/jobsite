@@ -75,7 +75,6 @@ export class SollicitatieListComponent implements OnInit {
 
   getSollicitatiesFromUser(id: number) {
     this.sollicitaties$ = this.sollicitatieService.getSollicitatiesFromUser(id).subscribe(result => this.sollicitaties = result);
-    console.log(this.sollicitaties)
   }
 
   terug() {

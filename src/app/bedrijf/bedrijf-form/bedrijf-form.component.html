@@ -1,9 +1,6 @@
 <div class="alert alert-danger" role="alert" *ngIf="isSubmitted && errorMessage">
     {{errorMessage}}
 </div>
-<div class="alert alert-warning" role="warning">
-    <p>Form Status: {{ bedrijfForm.status }}</p>
-</div>
 <form (ngSubmit)="onSubmit()" [formGroup]="bedrijfForm">
     <div class="form-group">
       <label for="naam">Naam</label>
@@ -37,7 +34,7 @@
       <div *ngIf="isEdit && imageSrc">
         <img src="{{imageSrc}}" alt="user image">
       </div>
-    <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!bedrijfForm.valid || isSubmitted">Add</button>
-    <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!bedrijfForm.valid || isSubmitted">Save</button>
+    <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!bedrijfForm.valid || isSubmitted">Toevoegen</button>
+    <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!bedrijfForm.valid || isSubmitted">Opslaan</button>
     <button type="submit" class="btn btn-success" routerLink="/bedrijf">Terug</button>
 </form>

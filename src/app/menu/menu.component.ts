@@ -18,7 +18,10 @@ export class MenuComponent implements OnInit {
 
 
   constructor(public authService: AuthService, private router: Router, private userService: UserService) {
-
+    const userId = localStorage.getItem('id');
+    if (userId != null) {
+      this.userService.getUserById(+userId).subscribe(result => this.user = result);
+    }
   }
       
     

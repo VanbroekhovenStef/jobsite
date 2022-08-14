@@ -1,9 +1,6 @@
 <div class="alert alert-danger" role="alert" *ngIf="isSubmitted && errorMessage">
     {{errorMessage}}
 </div>
-<div class="alert alert-warning" role="warning">
-<p>Form Status: {{ vacatureForm.status }}</p>
-</div>
 <form (ngSubmit)="onSubmit()" [formGroup]="vacatureForm">
 <div class="form-group">
     <label for="name">Titel</label>
@@ -17,7 +14,7 @@
     <label for="name">Kwalificaties</label>
     <input type="text" class="form-control" id="kwalificaties" name="kwalificaties" placeholder="kwalificaties" formControlName="kwalificaties" minlength="2">
 </div>
-<div class="form-group">
+<div class="form-group" *ngIf="isAdd">
     <label for="countryId">Bedrijf</label>
     <select class="custom-select" formControlName="bedrijfId" id="bedrijfId">
         <option value="" disabled>Kies een bedrijf</option>

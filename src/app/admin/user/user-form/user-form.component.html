@@ -1,9 +1,6 @@
 <div class="alert alert-danger" role="alert" *ngIf="isSubmitted && errorMessage">
     {{errorMessage}}
 </div>
-<div class="alert alert-warning" role="warning">
-    <p>Form Status: {{ userForm.status }}</p>
-</div>
 <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
     <div class="form-group">
         <label for="naam">Naam</label>
