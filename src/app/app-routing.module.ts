@@ -18,7 +18,7 @@ import { VacatureListComponent } from './vacature/vacature-list/vacature-list.co
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'bedrijf', loadChildren: () => import('./bedrijf/bedrijf.module').then(m => m.BedrijfModule), canActivate: [AuthGuard], canActivateChild: [AuthGuard] },
+  { path: 'bedrijf', loadChildren: () => import('./bedrijf/bedrijf.module').then(m => m.BedrijfModule) },
   { path: 'login', component: SecurityComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: SecurityComponent },

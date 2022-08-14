@@ -26,6 +26,7 @@ export class SollicitatieListComponent implements OnInit {
     this.id = +this.router.getCurrentNavigation()?.extras.state?.id;
     this.isGebruiker = this.router.getCurrentNavigation()?.extras.state?.mode === 'gebruiker';
     console.log(this.isGebruiker)
+    console.log(this.id)
   }
 
   ngOnInit(): void {
@@ -74,6 +75,7 @@ export class SollicitatieListComponent implements OnInit {
 
   getSollicitatiesFromUser(id: number) {
     this.sollicitaties$ = this.sollicitatieService.getSollicitatiesFromUser(id).subscribe(result => this.sollicitaties = result);
+    console.log(this.sollicitaties)
   }
 
   terug() {

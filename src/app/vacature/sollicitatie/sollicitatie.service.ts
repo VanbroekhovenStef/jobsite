@@ -17,6 +17,7 @@ export class SollicitatieService {
   }
 
   getSollicitatiesFromUser(id: number): Observable<Sollicitatie[]> {
+    console.log(id);
     return this.httpClient.get<Sollicitatie[]>('https://localhost:44393/api/sollicitaties?userId=' + id)
   }
   getSollicitatiesOnVacatureFromUser(userId: number, vacatureId: number): Observable<Sollicitatie> {
@@ -39,14 +40,4 @@ export class SollicitatieService {
     console.log(sollicitatie);
     return this.httpClient.post<Sollicitatie>("https://localhost:44393/api/sollicitaties", sollicitatie);
   }
-
-  // postSollicitatie(id: number): Observable<Sollicitatie> {
-  //   return this.getArticleById(id).pipe(
-  //           switchMap(article => {
-  //             article.statusId = StatusEnum.PUBLISHED;
-  //             return this.putArticle(id, article);
-  //           })
-  //   );
-
-  // }
 }

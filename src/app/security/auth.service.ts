@@ -49,6 +49,8 @@ export class AuthService {
   }
 
   register(user: Register): Observable<UserResponse> {
+    console.log(user);
+    console.log("arrived");
     return this.httpClient.post<UserResponse>('https://localhost:44393/api/users', user);
   }
 
