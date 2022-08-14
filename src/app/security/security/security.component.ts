@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -18,8 +19,7 @@ export class SecurityComponent implements OnInit {
   isRegister: boolean = false;
   isLogout: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
-
+  constructor(private authService: AuthService, private router: Router, private http: HttpClient) {
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/security/auth.service';
@@ -35,16 +35,15 @@ export class UserFormComponent implements OnInit {
   // reactive form
   userForm = new FormGroup({
     id: new FormControl(0),
-    naam: new FormControl(''),
-    voornaam: new FormControl(''),
-    email: new FormControl(''),
-    adres: new FormControl(''),
-    telefoon: new FormControl(''),
+    naam: new FormControl('', [Validators.required]),
+    voornaam: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    adres: new FormControl('', [Validators.required]),
+    telefoon: new FormControl('', [Validators.required]),
     linkedIn: new FormControl(''),
-    // cv: new FormControl(''),
     roleId: new FormControl(0),
     foto: new FormControl(''),
-    wachtwoord: new FormControl('')
+    wachtwoord: new FormControl('', [Validators.required])
   });
 
   roles: Role[] = [];
@@ -110,29 +109,22 @@ export class UserFormComponent implements OnInit {
   }
   
   onSubmit(): void {
-    this.isSubmitted = true;
-    if (this.imageFile === undefined && this.isAdd) {
-      this.isSubmitted = false;
-      this.errorMessage = 'No image selected!';
-    } else {
-      if (this.isImageChanged) {
-        this.task = this.angularFireStorage.upload(this.filePath, this.imageFile);
-        this.task.snapshotChanges().subscribe(result => {
-          this.ref?.getDownloadURL().subscribe(url => {
-            this.userForm.patchValue({
-              foto: url
-            });
-            if (url !== undefined) {
-              this.submitData();
-            }
+    if (this.isImageChanged) {
+      this.task = this.angularFireStorage.upload(this.filePath, this.imageFile);
+      this.task.snapshotChanges().subscribe(result => {
+        this.ref?.getDownloadURL().subscribe(url => {
+          this.userForm.patchValue({
+            foto: url
           });
+          if (url !== undefined) {
+            this.submitData();
+          }
         });
-        this.task.percentageChanges().subscribe(p => this.uploadProgress = p);
-      } else {
-        this.submitData();
-      }
+      });
+      this.task.percentageChanges().subscribe(p => this.uploadProgress = p);
+    } else {
+      this.submitData();
     }
-    
   }
 
   submitData(): void {

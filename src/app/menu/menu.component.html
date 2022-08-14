@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a *ngIf="!authService.isLoggedIn()" class="navbar-brand" routerLink="/">Jobsite</a>
-        <a *ngIf="authService.isLoggedIn()" class="navbar-brand" routerLink="/">Welkom {{user.voornaam}}</a>
+        <a *ngIf="authService.isLoggedIn()" class="navbar-brand" routerLink="/">Welkom</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,15 +18,16 @@
                 <li *ngIf="authService.isLoggedIn() && authService.isBedrijfsbeheerder()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <a class="nav-link" (click)="bedrijvenBeheren(user.id)">Bedrijven beheren</a>
                 </li>
-                <li *ngIf="authService.isLoggedIn() && authService.isBedrijfsbeheerder()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <li *ngIf="authService.isBedrijfsbeheerder() || authService.isSuperadmin()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <a class="nav-link" routerLink="/vacature">Vacatures beheren</a>
                 </li>  
                 <li *ngIf="authService.isLoggedIn() && authService.isSuperadmin()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a class="nav-link" (click)="bedrijvenBeherenAdmin()">Bedrijven beheren</a>
-                </li>   
+                    <a class="nav-link" routerLink="/bedrijf">Bedrijven beheren</a>
+                </li>
                 <li *ngIf="authService.isLoggedIn() && authService.isSuperadmin()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <a class="nav-link" routerLink="/admin/user">Users beheren</a>
-                </li>          
+                </li>    
+                      
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">

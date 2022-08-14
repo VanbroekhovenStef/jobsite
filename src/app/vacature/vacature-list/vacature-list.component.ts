@@ -31,7 +31,7 @@ export class VacatureListComponent implements OnInit {
       if (this.roleId == 2) {
         this.getBedrijvenFromUser();
         console.log(this.bedrijven);
-      } else {
+      } else if(this.roleId == 3) {
         this.getVacatures();
       }
     }

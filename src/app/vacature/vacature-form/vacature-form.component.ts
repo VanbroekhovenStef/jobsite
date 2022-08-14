@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bedrijf } from 'src/app/bedrijf/bedrijf';
@@ -32,10 +32,10 @@ export class VacatureFormComponent implements OnInit {
   // reactive form
   vacatureForm = new FormGroup({
     id: new FormControl(0),
-    titel: new FormControl(''),
-    omschrijving: new FormControl(''),
-    kwalificaties: new FormControl(''),
-    datumSluiting: new FormControl(''),
+    titel: new FormControl('', [Validators.required]),
+    omschrijving: new FormControl('', [Validators.required]),
+    kwalificaties: new FormControl('', [Validators.required]),
+    datumSluiting: new FormControl('', [Validators.required]),
     bedrijfId: new FormControl(0)
   });
 

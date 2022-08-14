@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="Voornaam" formControlName="email" minlength="2">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Voornaam" formControlName="email" minlength="2">
     </div>
     <div class="form-group">
         <label for="adres">Adres</label>
@@ -27,7 +27,7 @@
     </div>
     <div class="form-group">
         <label for="linkedIn">LinkedIn</label>
-        <input type="text" class="form-control" id="linkedIn" name="linkedIn" placeholder="linkedIn" formControlName="linkedIn" minlength="2">
+        <input type="text" class="form-control" id="linkedIn" name="linkedIn" placeholder="linkedIn" formControlName="linkedIn">
     </div>
     <div class="form-group" *ngIf="authService.isLoggedIn() && authService.isSuperadmin()">
         <label for="roleId">Usereigenschappen</label>

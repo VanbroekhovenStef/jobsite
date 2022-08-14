@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { Role } from '../admin/user/role';
 import { User } from '../admin/user/user';
 import { UserService } from '../admin/user/user.service';
 import { AuthService } from '../security/auth.service';
+import { SecurityComponent } from '../security/security/security.component';
 
 @Component({
   selector: 'app-menu',
@@ -17,14 +18,13 @@ export class MenuComponent implements OnInit {
 
 
   constructor(public authService: AuthService, private router: Router, private userService: UserService) {
-    const userId = localStorage.getItem('id');
-    if (userId != null) {
-      this.userService.getUserById(+userId).subscribe(result => this.user = result);
-    }
-   }
+
+  }
+      
+    
 
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
   profielBeheren(id: number) {
