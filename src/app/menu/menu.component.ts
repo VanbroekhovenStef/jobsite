@@ -30,16 +30,19 @@ export class MenuComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  profielBeheren(id: number) {
+  profielBeheren() {
       //Navigate to form in edit mode
+      const id = localStorage.getItem('id');
       this.router.navigate(['/admin/user', id]);
   }
 
-  overzichtSollicitaties(id: number) {
-      this.router.navigate(['/sollicitatie'], {state: {id: id, mode: 'gebruiker'}})
+  overzichtSollicitaties() {
+    const id = localStorage.getItem('id');
+    this.router.navigate(['/sollicitatie'], {state: {id: id, mode: 'gebruiker'}})
   }
 
-  bedrijvenBeheren(id: number) {
+  bedrijvenBeheren() {
+    const id = localStorage.getItem('id');
     this.router.navigate(['bedrijf'], {state: {id: id, mode: 'beheerder'}});
   }
 
